@@ -16,23 +16,24 @@ pipeline {
         }
 
         stage('Create Virtual Environment') {
-            steps {
-                bat '''
-                python -m venv venv
-                call venv\\Scripts\\activate
-                pip install -r requirements.txt
-                '''
-            }
-        }
+    steps {
+        bat '''
+        "C:\\Users\\91902\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m venv venv
+        call venv\\Scripts\\activate
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        '''
+    }
+}
 
         stage('Run Tests') {
-            steps {
-                bat '''
-                call venv\\Scripts\\activate
-                pytest
-                '''
-            }
-        }
+    steps {
+        bat '''
+        call venv\\Scripts\\activate
+        python -m pytest
+        '''
+    }
+}
 
         stage('Build Docker Image') {
             steps {
